@@ -1,10 +1,12 @@
+#include <utility>
 #include <boost/asio.hpp>
 #include <boost/beast.hpp>
 #include <boost/program_options.hpp>
-#include <format>
 #include <iostream>
 #include <random>
 #include <spanstream>
+#include <array>
+#include <format>
 
 namespace beast = boost::beast;
 namespace http  = beast::http;
@@ -217,7 +219,12 @@ template <class Stream> void do_session(Stream& stream, ResponseCache const& cac
             http::serializer<false, decltype(res)::body_type> sr{res};
             http::write_header(stream, sr, ec);
             if (!ec) {
-                write(stream, std::array{net::buffer(body_view), net::buffer(std::string_view(ts_str))}, ec);
+                std::array<net::const_buffer, 2> buffers_to_write = {
+                    net::buffer(body_view.data(), body_view.size()),
+                    net::buffer(ts_str.data(), ts_str.size())
+                };
+                // Pass the explicitly typed array to asio::write
+                write(stream, buffers_to_write, ec);
             }
         }
 
