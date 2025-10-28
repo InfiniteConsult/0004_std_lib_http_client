@@ -3931,3 +3931,16 @@ The benchmark execution process, orchestrated by `run-benchmarks.sh`, generates 
   * They provide a convenient, high-level overview and a direct comparison of the different clients' performance characteristics based on `hyperfine`'s analysis. These summaries will form the primary basis for the results discussed in Chapter 10.
 
 Together, these outputs provide both a high-level statistical comparison and the raw data necessary for deeper, more granular performance investigation.
+
+
+
+
+# Acknowledgements
+
+## boost::beast
+
+I would like to thank [Sehe](https://github.com/sehe) for his help on improving the beast server and beast client usage. He improved my understanding of the `boost::beast` library greatly. This [issue](https://github.com/boostorg/beast/issues/3051) is super valuable for anyone looking to implement high performance boost HTTP clients and servers.
+
+## libcurl
+
+I would like to thank [bagder](https://github.com/bagder) for his tips about [tuning](https://github.com/curl/curl/discussions/19249) the curl buffers. I did benchmark with very large buffers but it looks like the stock buffer sizes are highly efficient so they will remain for the comparisons.
