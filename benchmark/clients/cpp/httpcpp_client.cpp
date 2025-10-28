@@ -1,3 +1,5 @@
+#include <climits>
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -89,10 +91,24 @@ bool read_benchmark_data(const std::string& filename, BenchmarkData& data) {
     return file.good();
 }
 
-uint64_t xor_checksum(std::span<const std::byte> data) {
+static inline uint64_t rotr64(uint64_t x, int s) {
+    const int N = sizeof(uint64_t) * CHAR_BIT;
+    int r = s % N;
+    if (r < 0) {
+        r += N;
+    }
+    if (r == 0) {
+        return x;
+    }
+
+    return (x >> r) | (x << (N - r));
+}
+
+uint64_t xor_checksum(const char* data, size_t len) {
     uint64_t checksum = 0;
-    for (const auto& byte : data) {
-        checksum ^= static_cast<unsigned char>(byte);
+    const unsigned char* p = (const unsigned char*)data;
+    for (size_t i = 0; i < len; ++i) {
+        checksum = rotr64(checksum, 7) ^ p[i];
     }
     return checksum;
 }
@@ -119,7 +135,7 @@ void run_benchmark(Client& client, const Config& config, const BenchmarkData& da
         std::transform(body_slice.begin(), body_slice.end(), payload_buffer.begin(), [](char c){ return std::byte(c); });
 
         if (config.verify) {
-            uint64_t checksum = xor_checksum(payload_buffer);
+            uint64_t checksum = xor_checksum(reinterpret_cast<const char*>(payload_buffer.data()), payload_buffer.size());
             std::stringstream ss;
             ss << std::hex << std::setw(16) << std::setfill('0') << checksum;
             std::string checksum_hex = ss.str();
@@ -142,7 +158,7 @@ void run_benchmark(Client& client, const Config& config, const BenchmarkData& da
             if (config.verify) {
                 auto res_payload = res.body.subspan(0, res.body.size() - 35);
                 auto res_checksum = res.body.subspan(res.body.size() - 35, 16);
-                uint64_t calculated = xor_checksum(res_payload);
+                uint64_t calculated = xor_checksum(reinterpret_cast<const char*>(res_payload.data()), res_payload.size());
                 uint64_t received = 0;
                 std::string_view hex_view(reinterpret_cast<const char*>(res_checksum.data()), res_checksum.size());
                 std::from_chars(hex_view.data(), hex_view.data() + hex_view.size(), received, 16);
@@ -162,7 +178,7 @@ void run_benchmark(Client& client, const Config& config, const BenchmarkData& da
                 std::span<const std::byte> body_span(res.body);
                 auto res_payload = body_span.subspan(0, body_span.size() - 35);
                 auto res_checksum = body_span.subspan(body_span.size() - 35, 16);
-                uint64_t calculated = xor_checksum(res_payload);
+                uint64_t calculated = xor_checksum(reinterpret_cast<const char*>(res_payload.data()), res_payload.size());;
                 uint64_t received = 0;
                 std::string_view hex_view(reinterpret_cast<const char*>(res_checksum.data()), res_checksum.size());
                 std::from_chars(hex_view.data(), hex_view.data() + hex_view.size(), received, 16);

@@ -76,7 +76,9 @@ fn read_benchmark_data(filename: &str) -> Result<BenchmarkData, Box<dyn Error>> 
 }
 
 fn xor_checksum(data: &[u8]) -> u64 {
-    data.iter().fold(0, |acc, &byte| acc ^ u64::from(byte))
+    data.iter().fold(0u64, |acc, &byte| {
+        acc.rotate_right(7) ^ u64::from(byte)
+    })
 }
 
 fn get_nanoseconds() -> u64 {

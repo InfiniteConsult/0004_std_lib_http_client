@@ -6,12 +6,15 @@ import functools
 import operator
 import traceback
 
+
 from httppy.tcp_transport import TcpTransport
 from httppy.unix_transport import UnixTransport
 from httppy.http1_protocol import Http1Protocol
 from httppy.httppy import HttpClient
 from httppy.http_protocol import HttpRequest, HttpMethod
 
+
+MASK64 = 0xFFFFFFFFFFFFFFFF
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Benchmark client for the 'httppy' library.")
@@ -44,8 +47,22 @@ def read_benchmark_data(filename="benchmark_data.bin"):
         sys.exit(f"Error: Data file '{filename}' not found. Please run the data_generator first.")
 
 
-def xor_checksum(data: bytes) -> int:
-    return functools.reduce(operator.xor, data, 0)
+def rotr64(x: int, s: int) -> int:
+    n = 64
+    r = s % n
+    if r < 0:
+        r += n
+    if r == 0:
+        return x
+    rotated = ((x >> r) | (x << (n - r))) & MASK64
+    return rotated
+
+
+def xor_checksum(data: bytes | memoryview) -> int:
+    checksum = 0
+    for byte in data:
+        checksum = rotr64(checksum, 7) ^ byte
+    return checksum
 
 
 def main():

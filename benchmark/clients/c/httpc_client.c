@@ -3,10 +3,11 @@
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
-#include <stdbool.h>
+#include <limits.h>
 #include <inttypes.h>
 
 #include <httpc/httpc.h>
+
 
 typedef struct {
     char* host;
@@ -98,11 +99,24 @@ bool read_benchmark_data(const char* filename, BenchmarkData* data) {
     return true;
 }
 
+static inline uint64_t rotr64(uint64_t x, int s) {
+    const int N = sizeof(uint64_t) * CHAR_BIT;
+    int r = s % N;
+    if (r < 0) {
+        r += N;
+    }
+    if (r == 0) {
+        return x;
+    }
+
+    return (x >> r) | (x << (N - r));
+}
+
 uint64_t xor_checksum(const char* data, size_t len) {
     uint64_t checksum = 0;
     const unsigned char* p = (const unsigned char*)data;
     for (size_t i = 0; i < len; ++i) {
-        checksum ^= p[i];
+        checksum = rotr64(checksum, 7) ^ p[i];
     }
     return checksum;
 }
