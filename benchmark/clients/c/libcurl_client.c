@@ -232,9 +232,10 @@ int main(int argc, char* argv[]) {
     curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_callback);
     curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, &response_data);
 
-    long buffer_size_bytes = 1024L * 1024L + 128L * 1024L; // 1 MiB + 128 KiB
-    curl_easy_setopt(curl_handle, CURLOPT_UPLOAD_BUFFERSIZE, buffer_size_bytes);
-    curl_easy_setopt(curl_handle, CURLOPT_BUFFERSIZE, buffer_size_bytes);
+    // Seems to be slower
+    // long buffer_size_bytes = 1024L * 1024L + 128L * 1024L; // 1 MiB + 128 KiB
+    // curl_easy_setopt(curl_handle, CURLOPT_UPLOAD_BUFFERSIZE, buffer_size_bytes);
+    // curl_easy_setopt(curl_handle, CURLOPT_BUFFERSIZE, buffer_size_bytes);
 
     for (uint64_t i = 0; i < config.num_requests; ++i) {
         response_buffer.len = 0; // Reset buffer for the new response
