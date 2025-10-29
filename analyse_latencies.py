@@ -82,7 +82,7 @@ def filter_and_analyze(raw_data: list[int]) -> tuple[dict[str, float] | None, in
     valid_latencies = []
     excluded_count = 0
     for value in raw_data:
-        if value >= 0:
+        if value > 0:
             valid_latencies.append(value)
         else:
             excluded_count += 1
