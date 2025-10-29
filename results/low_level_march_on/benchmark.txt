@@ -1,0 +1,1092 @@
+
+==============================================================================
+  Generating Client Data (Sizes: 500000B - 1000000B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 50000
+  - Data block size: 976.562 KB
+
+==============================================================================
+  Running Scenario: 'throughput_balanced_large' (Transport: tcp) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_copy.bin
+  Time (mean ± σ):      6.655 s ±  0.071 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    6.609 s …  6.923 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_no_copy.bin
+  Time (mean ± σ):      6.476 s ±  0.089 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    6.405 s …  6.747 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_vectored.bin --io-policy vectored
+  Time (mean ± σ):      5.954 s ±  0.011 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.933 s …  5.983 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_balanced_large.bin
+  Time (mean ± σ):      8.500 s ±  0.028 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.457 s …  8.606 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      8.952 s ±  0.019 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.924 s …  8.995 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):      8.181 s ±  0.013 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.159 s …  8.206 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      6.986 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    6.944 s …  7.022 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_balanced_large_unsafe.bin
+  Time (mean ± σ):      6.027 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.000 s …  6.052 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      9.350 s ±  0.021 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    9.310 s …  9.416 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):      8.081 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.036 s …  8.117 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_balanced_large_safe.bin
+  Time (mean ± σ):     23.923 s ±  0.985 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   21.907 s … 25.483 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):     21.180 s ±  0.751 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   19.989 s … 22.718 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_balanced_large.bin
+  Time (mean ± σ):     38.136 s ±  0.465 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   37.183 s … 39.004 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_balanced_large.bin
+  Time (mean ± σ):      8.606 s ±  0.347 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.363 s …  9.153 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_balanced_large_unsafe.bin'
+    1.09 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_no_copy.bin'
+    1.12 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_balanced_large_copy.bin'
+    1.17 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_balanced_large_safe.bin'
+    1.36 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_balanced_large_unsafe.bin --unsafe'
+    1.37 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_balanced_large_unsafe.bin --unsafe'
+    1.43 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_balanced_large.bin'
+    1.45 ± 0.06 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_balanced_large.bin'
+    1.50 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_balanced_large_safe.bin'
+    1.57 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_balanced_large_safe.bin'
+    3.56 ± 0.13 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_balanced_large_unsafe.bin --unsafe'
+    4.02 ± 0.17 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_balanced_large_safe.bin'
+    6.40 ± 0.08 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_balanced_large.bin'
+
+==============================================================================
+  Running Scenario: 'throughput_balanced_large' (Transport: unix) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_balanced_large_copy.bin
+  Time (mean ± σ):      6.161 s ±  0.081 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    6.111 s …  6.470 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_balanced_large_no_copy.bin
+  Time (mean ± σ):      5.941 s ±  0.054 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    5.914 s …  6.222 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_balanced_large_vectored.bin --io-policy vectored
+  Time (mean ± σ):      5.294 s ±  0.010 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.271 s …  5.317 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_balanced_large.bin
+  Time (mean ± σ):      7.021 s ±  0.029 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.967 s …  7.071 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      8.328 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.299 s …  8.362 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):      7.974 s ±  0.398 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    7.628 s …  8.498 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      6.218 s ±  0.015 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.186 s …  6.253 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_balanced_large_unsafe.bin
+  Time (mean ± σ):      5.367 s ±  0.013 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    5.346 s …  5.403 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_balanced_large_safe.bin
+  Time (mean ± σ):      9.330 s ±  0.028 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    9.269 s …  9.384 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):      8.285 s ±  0.025 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.231 s …  8.339 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_balanced_large_safe.bin
+  Time (mean ± σ):     18.870 s ±  1.084 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   17.300 s … 20.910 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_balanced_large_unsafe.bin --unsafe
+  Time (mean ± σ):     17.234 s ±  0.650 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   16.935 s … 19.629 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_balanced_large.bin
+  Time (mean ± σ):     31.709 s ±  2.576 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   29.696 s … 35.777 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_balanced_large_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_balanced_large_unsafe.bin'
+    1.12 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_balanced_large_no_copy.bin'
+    1.16 ± 0.02 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_balanced_large_copy.bin'
+    1.17 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_balanced_large_safe.bin'
+    1.33 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_balanced_large.bin'
+    1.51 ± 0.08 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_balanced_large_unsafe.bin --unsafe'
+    1.57 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_balanced_large_unsafe.bin --unsafe'
+    1.57 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_balanced_large_safe.bin'
+    1.76 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_balanced_large_safe.bin'
+    3.26 ± 0.12 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_balanced_large_unsafe.bin --unsafe'
+    3.56 ± 0.20 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_balanced_large_safe.bin'
+    5.99 ± 0.49 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_balanced_large.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 500000B - 1000000B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 50000
+  - Data block size: 976.562 KB
+
+==============================================================================
+  Running Scenario: 'throughput_uplink_heavy' (Transport: tcp) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_copy.bin
+  Time (mean ± σ):      3.680 s ±  0.018 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    3.652 s …  3.711 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_no_copy.bin
+  Time (mean ± σ):      3.676 s ±  0.055 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.648 s …  3.958 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_vectored.bin --io-policy vectored
+  Time (mean ± σ):      3.046 s ±  0.028 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    3.025 s …  3.147 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_uplink_heavy.bin
+  Time (mean ± σ):      4.973 s ±  0.184 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.887 s …  5.654 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      5.176 s ±  0.023 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.134 s …  5.220 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      5.172 s ±  0.020 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.131 s …  5.229 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      3.694 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.669 s …  3.715 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_uplink_heavy_unsafe.bin
+  Time (mean ± σ):      3.070 s ±  0.011 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.037 s …  3.088 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      5.165 s ±  0.016 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.140 s …  5.209 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      5.055 s ±  0.018 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    5.029 s …  5.108 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      8.930 s ±  0.020 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.889 s …  8.990 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      8.869 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.838 s …  8.911 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_uplink_heavy.bin
+  Time (mean ± σ):     21.773 s ±  1.517 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   19.353 s … 22.892 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_uplink_heavy.bin
+  Time (mean ± σ):      5.075 s ±  0.344 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.814 s …  6.137 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_uplink_heavy_unsafe.bin'
+    1.21 ± 0.02 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_no_copy.bin'
+    1.21 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_uplink_heavy_copy.bin'
+    1.21 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_uplink_heavy_safe.bin'
+    1.63 ± 0.06 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_uplink_heavy.bin'
+    1.66 ± 0.02 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_uplink_heavy_unsafe.bin --unsafe'
+    1.67 ± 0.11 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_uplink_heavy.bin'
+    1.70 ± 0.02 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_uplink_heavy_safe.bin'
+    1.70 ± 0.02 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_uplink_heavy_unsafe.bin --unsafe'
+    1.70 ± 0.02 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_uplink_heavy_safe.bin'
+    2.91 ± 0.03 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_uplink_heavy_unsafe.bin --unsafe'
+    2.93 ± 0.03 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_uplink_heavy_safe.bin'
+    7.15 ± 0.50 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_uplink_heavy.bin'
+
+==============================================================================
+  Running Scenario: 'throughput_uplink_heavy' (Transport: unix) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_copy.bin
+  Time (mean ± σ):      3.810 s ±  0.021 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.780 s …  3.858 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_no_copy.bin
+  Time (mean ± σ):      3.808 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.755 s …  3.837 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_vectored.bin --io-policy vectored
+  Time (mean ± σ):      3.174 s ±  0.013 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.156 s …  3.204 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_uplink_heavy.bin
+  Time (mean ± σ):      4.640 s ±  0.024 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.588 s …  4.688 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      5.232 s ±  0.015 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.207 s …  5.260 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      5.223 s ±  0.016 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.197 s …  5.255 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      3.859 s ±  0.019 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.822 s …  3.909 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_uplink_heavy_unsafe.bin
+  Time (mean ± σ):      3.234 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.209 s …  3.259 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      5.274 s ±  0.021 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    5.239 s …  5.335 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      5.152 s ±  0.027 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.090 s …  5.229 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_uplink_heavy_safe.bin
+  Time (mean ± σ):      8.898 s ±  0.016 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.868 s …  8.925 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_uplink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      8.879 s ±  0.016 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.851 s …  8.912 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_uplink_heavy.bin
+  Time (mean ± σ):     17.777 s ±  0.087 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   17.598 s … 17.954 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_vectored.bin --io-policy vectored' ran
+    1.02 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_uplink_heavy_unsafe.bin'
+    1.20 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_no_copy.bin'
+    1.20 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_uplink_heavy_copy.bin'
+    1.22 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_uplink_heavy_safe.bin'
+    1.46 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_uplink_heavy.bin'
+    1.62 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_uplink_heavy_unsafe.bin --unsafe'
+    1.65 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_uplink_heavy_unsafe.bin --unsafe'
+    1.65 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_uplink_heavy_safe.bin'
+    1.66 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_uplink_heavy_safe.bin'
+    2.80 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_uplink_heavy_unsafe.bin --unsafe'
+    2.80 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_uplink_heavy_safe.bin'
+    5.60 ± 0.04 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_uplink_heavy.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 64B - 8192B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 50000
+  - Data block size: 8 KB
+
+==============================================================================
+  Running Scenario: 'throughput_downlink_heavy' (Transport: tcp) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_copy.bin
+  Time (mean ± σ):      3.125 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.077 s …  3.139 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_no_copy.bin
+  Time (mean ± σ):      3.125 s ±  0.011 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.094 s …  3.139 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_vectored.bin --io-policy vectored
+  Time (mean ± σ):      3.124 s ±  0.023 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.035 s …  3.144 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_downlink_heavy.bin
+  Time (mean ± σ):      3.465 s ±  0.025 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.406 s …  3.520 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      3.331 s ±  0.021 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    3.295 s …  3.379 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      2.895 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.864 s …  2.923 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      3.175 s ±  0.011 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    3.146 s …  3.191 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_downlink_heavy_unsafe.bin
+  Time (mean ± σ):      3.163 s ±  0.019 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    3.116 s …  3.189 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      3.381 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.352 s …  3.404 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      2.922 s ±  0.005 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.913 s …  2.933 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):     10.574 s ±  2.016 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.372 s … 13.305 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      7.791 s ±  0.208 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    7.679 s …  8.620 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_downlink_heavy.bin
+  Time (mean ± σ):     26.141 s ±  0.349 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   25.793 s … 27.586 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_downlink_heavy.bin
+  Time (mean ± σ):     14.519 s ±  0.039 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   14.409 s … 14.592 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_downlink_heavy_unsafe.bin --unsafe' ran
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_downlink_heavy_unsafe.bin --unsafe'
+    1.08 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_vectored.bin --io-policy vectored'
+    1.08 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_copy.bin'
+    1.08 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_throughput_downlink_heavy_no_copy.bin'
+    1.09 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_downlink_heavy_unsafe.bin'
+    1.10 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_throughput_downlink_heavy_safe.bin'
+    1.15 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_throughput_downlink_heavy_safe.bin'
+    1.17 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_throughput_downlink_heavy_safe.bin'
+    1.20 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_throughput_downlink_heavy.bin'
+    2.69 ± 0.07 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_downlink_heavy_unsafe.bin --unsafe'
+    3.65 ± 0.70 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_throughput_downlink_heavy_safe.bin'
+    5.01 ± 0.02 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_throughput_downlink_heavy.bin'
+    9.03 ± 0.13 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_throughput_downlink_heavy.bin'
+
+==============================================================================
+  Running Scenario: 'throughput_downlink_heavy' (Transport: unix) NUM_REQUESTS=50000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_copy.bin
+  Time (mean ± σ):      2.201 s ±  0.004 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.188 s …  2.208 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_no_copy.bin
+  Time (mean ± σ):      2.203 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.197 s …  2.209 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_vectored.bin --io-policy vectored
+  Time (mean ± σ):      2.201 s ±  0.006 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.189 s …  2.227 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_downlink_heavy.bin
+  Time (mean ± σ):      2.951 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.937 s …  2.962 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      2.607 s ±  0.011 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.590 s …  2.634 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      2.242 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.224 s …  2.257 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      2.275 s ±  0.004 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.265 s …  2.283 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_downlink_heavy_unsafe.bin
+  Time (mean ± σ):      2.270 s ±  0.005 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.262 s …  2.278 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):      2.659 s ±  0.014 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.639 s …  2.691 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      2.199 s ±  0.008 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    2.188 s …  2.218 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_downlink_heavy_safe.bin
+  Time (mean ± σ):     11.784 s ±  1.370 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.370 s … 12.867 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_downlink_heavy_unsafe.bin --unsafe
+  Time (mean ± σ):      7.459 s ±  0.112 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    7.371 s …  7.862 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_downlink_heavy.bin
+  Time (mean ± σ):     24.000 s ±  0.130 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   23.790 s … 24.312 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_downlink_heavy_unsafe.bin --unsafe' ran
+    1.00 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_copy.bin'
+    1.00 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_vectored.bin --io-policy vectored'
+    1.00 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_throughput_downlink_heavy_no_copy.bin'
+    1.02 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_downlink_heavy_unsafe.bin --unsafe'
+    1.03 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_downlink_heavy_unsafe.bin'
+    1.03 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_throughput_downlink_heavy_safe.bin'
+    1.19 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_throughput_downlink_heavy_safe.bin'
+    1.21 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_throughput_downlink_heavy_safe.bin'
+    1.34 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_throughput_downlink_heavy.bin'
+    3.39 ± 0.05 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_downlink_heavy_unsafe.bin --unsafe'
+    5.36 ± 0.62 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_throughput_downlink_heavy_safe.bin'
+   10.91 ± 0.07 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 50000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_throughput_downlink_heavy.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 64B - 8192B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 300000
+  - Data block size: 8 KB
+
+==============================================================================
+  Running Scenario: 'latency_small_small' (Transport: tcp) NUM_REQUESTS=300000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_latency_small_small_copy.bin
+  Time (mean ± σ):      2.693 s ±  0.007 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.680 s …  2.717 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_latency_small_small_no_copy.bin
+  Time (mean ± σ):      2.687 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.673 s …  2.776 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_latency_small_small_vectored.bin --io-policy vectored
+  Time (mean ± σ):      2.681 s ±  0.005 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.668 s …  2.691 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_latency_small_small.bin
+  Time (mean ± σ):      4.471 s ±  0.010 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.455 s …  4.494 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_latency_small_small_safe.bin
+  Time (mean ± σ):      2.741 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.730 s …  2.759 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      2.701 s ±  0.008 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.688 s …  2.724 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_latency_small_small_safe.bin
+  Time (mean ± σ):      2.799 s ±  0.007 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.783 s …  2.817 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_latency_small_small_unsafe.bin
+  Time (mean ± σ):      2.787 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.769 s …  2.798 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_latency_small_small_safe.bin
+  Time (mean ± σ):      2.747 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.721 s …  2.772 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      2.673 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.657 s …  2.706 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_latency_small_small_safe.bin
+  Time (mean ± σ):      4.534 s ±  0.121 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.464 s …  5.157 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      4.245 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.211 s …  4.289 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_latency_small_small.bin
+  Time (mean ± σ):     66.240 s ±  0.512 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   65.118 s … 67.074 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_latency_small_small.bin
+  Time (mean ± σ):      5.616 s ±  0.051 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    5.556 s …  5.804 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_latency_small_small_unsafe.bin --unsafe' ran
+    1.00 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_latency_small_small_vectored.bin --io-policy vectored'
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_latency_small_small_no_copy.bin'
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_latency_small_small_copy.bin'
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_latency_small_small_unsafe.bin --unsafe'
+    1.03 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_latency_small_small_safe.bin'
+    1.03 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_latency_small_small_safe.bin'
+    1.04 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_latency_small_small_unsafe.bin'
+    1.05 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_latency_small_small_safe.bin'
+    1.59 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_latency_small_small_unsafe.bin --unsafe'
+    1.67 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_latency_small_small.bin'
+    1.70 ± 0.05 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_latency_small_small_safe.bin'
+    2.10 ± 0.02 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_latency_small_small.bin'
+   24.78 ± 0.22 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_latency_small_small.bin'
+
+==============================================================================
+  Running Scenario: 'latency_small_small' (Transport: unix) NUM_REQUESTS=300000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_latency_small_small_copy.bin
+  Time (mean ± σ):      2.423 s ±  0.007 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.412 s …  2.437 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_latency_small_small_no_copy.bin
+  Time (mean ± σ):      2.359 s ±  0.006 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.346 s …  2.378 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_latency_small_small_vectored.bin --io-policy vectored
+  Time (mean ± σ):      2.364 s ±  0.005 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.356 s …  2.372 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_latency_small_small.bin
+  Time (mean ± σ):      3.902 s ±  0.012 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.881 s …  3.929 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_latency_small_small_safe.bin
+  Time (mean ± σ):      2.434 s ±  0.008 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.416 s …  2.449 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      2.376 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.363 s …  2.390 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_latency_small_small_safe.bin
+  Time (mean ± σ):      2.569 s ±  0.007 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.555 s …  2.583 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_latency_small_small_unsafe.bin
+  Time (mean ± σ):      2.557 s ±  0.006 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.543 s …  2.568 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_latency_small_small_safe.bin
+  Time (mean ± σ):      2.432 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.422 s …  2.451 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      2.371 s ±  0.009 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.356 s …  2.394 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_latency_small_small_safe.bin
+  Time (mean ± σ):      4.298 s ±  0.023 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.260 s …  4.360 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_latency_small_small_unsafe.bin --unsafe
+  Time (mean ± σ):      4.029 s ±  0.027 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.981 s …  4.091 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_latency_small_small.bin
+  Time (mean ± σ):     64.979 s ±  6.050 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   58.601 s … 72.632 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_latency_small_small_no_copy.bin' ran
+    1.00 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_latency_small_small_vectored.bin --io-policy vectored'
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_latency_small_small_unsafe.bin --unsafe'
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_latency_small_small_unsafe.bin --unsafe'
+    1.03 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_latency_small_small_copy.bin'
+    1.03 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_latency_small_small_safe.bin'
+    1.03 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_latency_small_small_safe.bin'
+    1.08 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_latency_small_small_unsafe.bin'
+    1.09 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_latency_small_small_safe.bin'
+    1.65 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_latency_small_small.bin'
+    1.71 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_latency_small_small_unsafe.bin --unsafe'
+    1.82 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_latency_small_small_safe.bin'
+   27.55 ± 2.57 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 300000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_latency_small_small.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 64B - 8192B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 75000
+  - Data block size: 8 KB
+
+==============================================================================
+  Running Scenario: 'mixed_server_random' (Transport: tcp) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_server_random_copy.bin
+  Time (mean ± σ):      1.474 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.469 s …  1.481 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_server_random_no_copy.bin
+  Time (mean ± σ):      1.473 s ±  0.005 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    1.468 s …  1.497 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_server_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      1.470 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.463 s …  1.496 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_server_random.bin
+  Time (mean ± σ):      2.174 s ±  0.011 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    2.158 s …  2.197 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.632 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.627 s …  1.640 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      1.487 s ±  0.002 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.482 s …  1.495 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.512 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.508 s …  1.519 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_server_random_unsafe.bin
+  Time (mean ± σ):      1.508 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.504 s …  1.516 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.660 s ±  0.003 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    1.655 s …  1.665 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      1.522 s ±  0.019 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.510 s …  1.567 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_server_random_safe.bin
+  Time (mean ± σ):      3.859 s ±  0.036 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.794 s …  3.925 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      3.501 s ±  0.096 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.433 s …  3.938 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_server_random.bin
+  Time (mean ± σ):     22.274 s ±  2.236 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   20.691 s … 27.115 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_server_random.bin
+  Time (mean ± σ):      2.686 s ±  0.108 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    2.611 s …  2.932 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_server_random_vectored.bin --io-policy vectored' ran
+    1.00 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_server_random_no_copy.bin'
+    1.00 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_server_random_copy.bin'
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_server_random_unsafe.bin --unsafe'
+    1.03 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_server_random_unsafe.bin'
+    1.03 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_server_random_safe.bin'
+    1.03 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_server_random_unsafe.bin --unsafe'
+    1.11 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_server_random_safe.bin'
+    1.13 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_server_random_safe.bin'
+    1.48 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_server_random.bin'
+    1.83 ± 0.07 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_server_random.bin'
+    2.38 ± 0.07 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_server_random_unsafe.bin --unsafe'
+    2.62 ± 0.03 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_server_random_safe.bin'
+   15.15 ± 1.52 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_server_random.bin'
+
+==============================================================================
+  Running Scenario: 'mixed_server_random' (Transport: unix) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_server_random_copy.bin
+  Time (mean ± σ):      1.263 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.255 s …  1.333 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_server_random_no_copy.bin
+  Time (mean ± σ):      1.264 s ±  0.018 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    1.252 s …  1.330 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_server_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      1.272 s ±  0.027 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.254 s …  1.336 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_server_random.bin
+  Time (mean ± σ):      1.941 s ±  0.007 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.932 s …  1.965 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.487 s ±  0.003 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.482 s …  1.494 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      1.326 s ±  0.002 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.322 s …  1.330 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.357 s ±  0.003 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    1.351 s …  1.364 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_server_random_unsafe.bin
+  Time (mean ± σ):      1.348 s ±  0.002 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    1.342 s …  1.350 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_server_random_safe.bin
+  Time (mean ± σ):      1.471 s ±  0.058 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    1.379 s …  1.517 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      1.219 s ±  0.003 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    1.214 s …  1.224 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_server_random_safe.bin
+  Time (mean ± σ):      4.066 s ±  0.048 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.991 s …  4.181 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_server_random_unsafe.bin --unsafe
+  Time (mean ± σ):      3.577 s ±  0.049 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.536 s …  3.720 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_server_random.bin
+  Time (mean ± σ):     23.479 s ±  0.159 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   23.259 s … 23.784 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_server_random_unsafe.bin --unsafe' ran
+    1.04 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_server_random_copy.bin'
+    1.04 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_server_random_no_copy.bin'
+    1.04 ± 0.02 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_server_random_vectored.bin --io-policy vectored'
+    1.09 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_server_random_unsafe.bin --unsafe'
+    1.11 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_server_random_unsafe.bin'
+    1.11 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_server_random_safe.bin'
+    1.21 ± 0.05 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_server_random_safe.bin'
+    1.22 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_server_random_safe.bin'
+    1.59 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_server_random.bin'
+    2.93 ± 0.04 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_server_random_unsafe.bin --unsafe'
+    3.34 ± 0.04 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_server_random_safe.bin'
+   19.26 ± 0.14 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_server_random.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 64B - 1000000B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 75000
+  - Data block size: 976.562 KB
+
+==============================================================================
+  Running Scenario: 'mixed_balanced_random' (Transport: tcp) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_copy.bin
+  Time (mean ± σ):      4.985 s ±  0.020 s    [User: 0.002 s, System: 0.001 s]
+  Range (min … max):    4.959 s …  5.031 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_no_copy.bin
+  Time (mean ± σ):      4.942 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.913 s …  4.970 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      4.159 s ±  0.008 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.144 s …  4.180 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_balanced_random.bin
+  Time (mean ± σ):      6.957 s ±  0.015 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.936 s …  6.997 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      6.908 s ±  0.012 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.872 s …  6.926 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):      6.613 s ±  0.022 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    6.567 s …  6.657 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      4.977 s ±  0.012 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.948 s …  4.998 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_balanced_random_unsafe.bin
+  Time (mean ± σ):      4.185 s ±  0.009 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.169 s …  4.204 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      8.480 s ±  0.011 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.463 s …  8.505 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):      8.232 s ±  0.017 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.192 s …  8.264 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_balanced_random_safe.bin
+  Time (mean ± σ):     18.271 s ±  0.060 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   18.184 s … 18.452 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):     18.081 s ±  0.044 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   18.013 s … 18.198 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_balanced_random.bin
+  Time (mean ± σ):     38.308 s ±  0.171 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   37.921 s … 38.578 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_balanced_random.bin
+  Time (mean ± σ):      6.645 s ±  0.020 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    6.566 s …  6.673 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_balanced_random_unsafe.bin'
+    1.19 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_no_copy.bin'
+    1.20 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_balanced_random_safe.bin'
+    1.20 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_balanced_random_copy.bin'
+    1.59 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_balanced_random_unsafe.bin --unsafe'
+    1.60 ± 0.01 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_balanced_random.bin'
+    1.66 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_balanced_random_safe.bin'
+    1.67 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_balanced_random.bin'
+    1.98 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_balanced_random_unsafe.bin --unsafe'
+    2.04 ± 0.00 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_balanced_random_safe.bin'
+    4.35 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_balanced_random_unsafe.bin --unsafe'
+    4.39 ± 0.02 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_balanced_random_safe.bin'
+    9.21 ± 0.04 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_balanced_random.bin'
+
+==============================================================================
+  Running Scenario: 'mixed_balanced_random' (Transport: unix) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_balanced_random_copy.bin
+  Time (mean ± σ):      5.117 s ±  0.020 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.075 s …  5.169 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_balanced_random_no_copy.bin
+  Time (mean ± σ):      5.089 s ±  0.022 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.047 s …  5.152 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_balanced_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      4.330 s ±  0.013 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.303 s …  4.359 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_balanced_random.bin
+  Time (mean ± σ):      6.441 s ±  0.017 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.414 s …  6.477 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      7.169 s ±  0.029 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    7.106 s …  7.223 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):      6.866 s ±  0.025 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    6.802 s …  6.912 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      5.149 s ±  0.014 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.112 s …  5.180 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_balanced_random_unsafe.bin
+  Time (mean ± σ):      4.390 s ±  0.012 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.367 s …  4.419 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_balanced_random_safe.bin
+  Time (mean ± σ):      8.388 s ±  0.042 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    8.347 s …  8.568 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):      8.137 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    8.110 s …  8.198 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_balanced_random_safe.bin
+  Time (mean ± σ):     17.923 s ±  0.077 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   17.839 s … 18.129 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_balanced_random_unsafe.bin --unsafe
+  Time (mean ± σ):     17.663 s ±  0.029 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   17.623 s … 17.772 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_balanced_random.bin
+  Time (mean ± σ):     33.188 s ±  0.143 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   32.788 s … 33.423 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_balanced_random_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_balanced_random_unsafe.bin'
+    1.18 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_balanced_random_no_copy.bin'
+    1.18 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_balanced_random_copy.bin'
+    1.19 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_balanced_random_safe.bin'
+    1.49 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_balanced_random.bin'
+    1.59 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_balanced_random_unsafe.bin --unsafe'
+    1.66 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_balanced_random_safe.bin'
+    1.88 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_balanced_random_unsafe.bin --unsafe'
+    1.94 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_balanced_random_safe.bin'
+    4.08 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_balanced_random_unsafe.bin --unsafe'
+    4.14 ± 0.02 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_balanced_random_safe.bin'
+    7.66 ± 0.04 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_balanced_random.bin'
+
+==============================================================================
+  Generating Client Data (Sizes: 64B - 1000000B)
+==============================================================================
+
+Successfully wrote benchmark data to benchmark_data.bin
+  - Number of requests: 75000
+  - Data block size: 976.562 KB
+
+==============================================================================
+  Running Scenario: 'mixed_client_random' (Transport: tcp) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_client_random_copy.bin
+  Time (mean ± σ):      4.199 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.170 s …  4.236 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_client_random_no_copy.bin
+  Time (mean ± σ):      4.195 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.169 s …  4.228 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_client_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      3.431 s ±  0.020 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.401 s …  3.496 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_client_random.bin
+  Time (mean ± σ):      6.018 s ±  0.016 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.986 s …  6.042 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_client_random_safe.bin
+  Time (mean ± σ):      6.129 s ±  0.017 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.099 s …  6.160 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):      6.093 s ±  0.016 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    6.070 s …  6.145 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_client_random_safe.bin
+  Time (mean ± σ):      4.214 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.178 s …  4.237 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_client_random_unsafe.bin
+  Time (mean ± σ):      3.452 s ±  0.012 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    3.432 s …  3.484 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_client_random_safe.bin
+  Time (mean ± σ):      7.925 s ±  0.015 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    7.894 s …  7.959 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):      7.888 s ±  0.015 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    7.863 s …  7.917 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_client_random_safe.bin
+  Time (mean ± σ):     14.794 s ±  0.025 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   14.749 s … 14.854 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):     14.753 s ±  0.015 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   14.727 s … 14.776 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_client_random.bin
+  Time (mean ± σ):     31.433 s ±  0.182 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   31.056 s … 31.709 s    30 runs
+ 
+Benchmark 14: sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_client_random.bin
+  Time (mean ± σ):      5.956 s ±  0.048 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.904 s …  6.106 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_client_random_vectored.bin --io-policy vectored' ran
+    1.01 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_client_random_unsafe.bin'
+    1.22 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --unsafe --output-file latencies/latencies_httpc_tcp_mixed_client_random_no_copy.bin'
+    1.22 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpc_tcp_mixed_client_random_copy.bin'
+    1.23 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_boost_tcp_mixed_client_random_safe.bin'
+    1.74 ± 0.02 times faster than 'sudo taskset -c 3 ./reqwest_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_reqwest_tcp_mixed_client_random.bin'
+    1.75 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_libcurl_tcp_mixed_client_random.bin'
+    1.78 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_client_random_unsafe.bin --unsafe'
+    1.79 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host 127.0.0.1 --port 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httpcpp_tcp_mixed_client_random_safe.bin'
+    2.30 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_client_random_unsafe.bin --unsafe'
+    2.31 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httprust_tcp_mixed_client_random_safe.bin'
+    4.30 ± 0.02 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_client_random_unsafe.bin --unsafe'
+    4.31 ± 0.03 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_httppy_tcp_mixed_client_random_safe.bin'
+    9.16 ± 0.07 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py 127.0.0.1 8080 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport tcp --output-file latencies/latencies_requests_tcp_mixed_client_random.bin'
+
+==============================================================================
+  Running Scenario: 'mixed_client_random' (Transport: unix) NUM_REQUESTS=75000
+==============================================================================
+
+Benchmark 1: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_client_random_copy.bin
+  Time (mean ± σ):      4.267 s ±  0.014 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    4.242 s …  4.293 s    30 runs
+ 
+Benchmark 2: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_client_random_no_copy.bin
+  Time (mean ± σ):      4.269 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    4.239 s …  4.308 s    30 runs
+ 
+Benchmark 3: sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_client_random_vectored.bin --io-policy vectored
+  Time (mean ± σ):      3.510 s ±  0.011 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.487 s …  3.536 s    30 runs
+ 
+Benchmark 4: sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_client_random.bin
+  Time (mean ± σ):      5.634 s ±  0.018 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    5.602 s …  5.662 s    30 runs
+ 
+Benchmark 5: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_client_random_safe.bin
+  Time (mean ± σ):      6.035 s ±  0.029 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.991 s …  6.120 s    30 runs
+ 
+Benchmark 6: sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):      6.011 s ±  0.021 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):    5.974 s …  6.058 s    30 runs
+ 
+Benchmark 7: sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_client_random_safe.bin
+  Time (mean ± σ):      4.323 s ±  0.014 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):    4.304 s …  4.362 s    30 runs
+ 
+Benchmark 8: sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_client_random_unsafe.bin
+  Time (mean ± σ):      3.584 s ±  0.009 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    3.562 s …  3.603 s    30 runs
+ 
+Benchmark 9: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_client_random_safe.bin
+  Time (mean ± σ):      7.655 s ±  0.019 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    7.615 s …  7.696 s    30 runs
+ 
+Benchmark 10: sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):      7.620 s ±  0.016 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):    7.576 s …  7.646 s    30 runs
+ 
+Benchmark 11: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_client_random_safe.bin
+  Time (mean ± σ):     14.504 s ±  0.017 s    [User: 0.002 s, System: 0.002 s]
+  Range (min … max):   14.469 s … 14.528 s    30 runs
+ 
+Benchmark 12: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_client_random_unsafe.bin --unsafe
+  Time (mean ± σ):     14.497 s ±  0.018 s    [User: 0.003 s, System: 0.001 s]
+  Range (min … max):   14.469 s … 14.532 s    30 runs
+ 
+Benchmark 13: sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_client_random.bin
+  Time (mean ± σ):     27.207 s ±  0.150 s    [User: 0.003 s, System: 0.002 s]
+  Range (min … max):   26.891 s … 27.516 s    30 runs
+ 
+Summary
+  'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_client_random_vectored.bin --io-policy vectored' ran
+    1.02 ± 0.00 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --unsafe --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_client_random_unsafe.bin'
+    1.22 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpc_unix_mixed_client_random_copy.bin'
+    1.22 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpc_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --unsafe --output-file latencies/latencies_httpc_unix_mixed_client_random_no_copy.bin'
+    1.23 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/boost_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_boost_unix_mixed_client_random_safe.bin'
+    1.61 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/libcurl_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_libcurl_unix_mixed_client_random.bin'
+    1.71 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_client_random_unsafe.bin --unsafe'
+    1.72 ± 0.01 times faster than 'sudo taskset -c 3 ./benchmark/httpcpp_client --host /tmp/httpc_benchmark.sock --port 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httpcpp_unix_mixed_client_random_safe.bin'
+    2.17 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_client_random_unsafe.bin --unsafe'
+    2.18 ± 0.01 times faster than 'sudo taskset -c 3 ./httprust_client /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httprust_unix_mixed_client_random_safe.bin'
+    4.13 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_client_random_unsafe.bin --unsafe'
+    4.13 ± 0.01 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/httppy_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_httppy_unix_mixed_client_random_safe.bin'
+    7.75 ± 0.05 times faster than 'sudo taskset -c 3 ../.venv/bin/python3 ../benchmark/clients/python/requests_client.py /tmp/httpc_benchmark.sock 0 --num-requests 75000 --data-file benchmark_data.bin --no-verify --transport unix --output-file latencies/latencies_requests_unix_mixed_client_random.bin'
+
+==============================================================================
+  All benchmarks complete!
+==============================================================================
+
+Latency files are in 'build_release/latencies'
+Hyperfine results are in 'build_release/hyperfine_results_*.md'
