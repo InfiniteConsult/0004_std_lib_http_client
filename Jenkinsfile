@@ -54,34 +54,28 @@ pipeline {
             steps {
                 echo '--- Publishing to Artifactory ---'
 
-                // Define the server reference from our JCasC ID
-                rtServer (
-                    id: 'ART_SERVER',
-                    serverId: 'artifactory-local'
-                )
+                script {
+                    // 1. Get the Artifactory server instance we configured in JCasC
+                    // The ID 'artifactory' matches the 'instanceId' in our update_jcasc.py script
+                    def server = getArtifactoryServer serverId: 'artifactory'
 
-                // Upload the artifacts
-                // We map dist/filename -> generic-local/http-client/<BuildNumber>/filename
-                rtUpload (
-                    serverId: 'ART_SERVER',
-                    spec: '''{
+                    // 2. Define the upload spec
+                    def uploadSpec = """{
                           "files": [
                             {
                               "pattern": "dist/(.*)",
                               "target": "generic-local/http-client/${BUILD_NUMBER}/{1}"
                             }
                           ]
-                    }''',
-                    buildName: "${JOB_NAME}",
-                    buildNumber: "${BUILD_NUMBER}"
-                )
+                    }"""
 
-                // Publish Build Info (The "Bill of Materials")
-                rtPublishBuildInfo (
-                    serverId: 'ART_SERVER',
-                    buildName: "${JOB_NAME}",
-                    buildNumber: "${BUILD_NUMBER}"
-                )
+                    // 3. Upload Artifacts
+                    // We use the 'server' object we retrieved
+                    server.upload spec: uploadSpec
+
+                    // 4. Publish Build Info
+                    server.publishBuildInfo buildInfo: env.BUILD_NAME
+                }
             }
         }
     }
