@@ -5,7 +5,7 @@ edition = "2024"
 description = "A standard library HTTP client implementation"
 license = "MIT"
 repository = "https://gitlab.cicd.local:10300/Articles/0004_std_lib_http_client"
-authors = ["Warren Jitsing <your.email@gmail.com>"]
+authors = ["Warren Jitsing <warren.jitsing@infcon.co.za>"]
 
 [lib]
 name = "httprust"

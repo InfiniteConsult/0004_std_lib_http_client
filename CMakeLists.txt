@@ -38,6 +38,9 @@ FetchContent_Declare(
         GIT_TAG        v1.17.0
 )
 
+set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 FetchContent_MakeAvailable(googletest)
 
 
@@ -67,3 +70,22 @@ add_custom_target(python_wheel
 
 add_dependencies(httpc_lib python_wheel)
 add_dependencies(httpcpp_lib python_wheel)
+
+
+install(TARGETS httpc_lib httpcpp_lib
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+)
+
+install(DIRECTORY include/ DESTINATION include)
+
+set(CPACK_PACKAGE_NAME "http-client-cpp-sdk")
+set(CPACK_PACKAGE_VENDOR "Warren Jitsing")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Multi-Language HTTP Client SDK (C/C++)")
+set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_PACKAGE_CONTACT "warren.jitsing@infcon.co.za")
+
+set(CPACK_GENERATOR "TGZ")
+
+include(CPack)
