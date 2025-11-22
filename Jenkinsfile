@@ -56,14 +56,16 @@ pipeline {
 
                 rtUpload (
                     serverId: 'artifactory',
-                    spec: '''{
+                    spec: """{
                           "files": [
                             {
-                              "pattern": "dist/(.*)",
-                              "target": "generic-local/http-client/${BUILD_NUMBER}/{1}"
+                              "pattern": "dist/*",
+                              "target": "generic-local/http-client/${BUILD_NUMBER}/",
+                              "flat": "true"
                             }
                           ]
-                    }''',
+                    }""",
+                    failNoOp: true,
                     buildName: "${JOB_NAME}",
                     buildNumber: "${BUILD_NUMBER}"
                 )
