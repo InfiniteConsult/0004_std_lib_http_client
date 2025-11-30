@@ -4,8 +4,8 @@
 # -----------------------------------------------------------
 #               run-coverage-cicd.sh
 #
-#  Executes tests and generates coverage reports in formats
-#  compatible with SonarQube (XML/LCOV).
+#  Adapted from run-coverage.sh for CI/CD.
+#  Generates XML/LCOV reports instead of HTML.
 #
 # -----------------------------------------------------------
 
@@ -14,30 +14,27 @@ set -e
 # --- 1. C/C++ Coverage (LCOV) ---
 echo "--- Running C/C++ Tests & Coverage ---"
 (
-    # Create build directory if it doesn't exist
     mkdir -p build_debug
-    cd build_debug
+    cd build_debug || exit
 
-    # Configure & Build (Debug mode for coverage flags)
+    # Ensure Debug build for coverage flags
     cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON ..
     cmake --build . -- -j$(nproc)
 
-    # Reset counters
-    lcov --directory . --zerocounters -q
+    # Added --ignore-errors version for CI toolchain mismatch
+    lcov --directory . --zerocounters --ignore-errors version
 
-    # Run Tests
     ctest --output-on-failure
 
-    # Capture Coverage
-    # Added --ignore-errors version to handle GCC 15 vs System GCOV mismatch
+    # Added --ignore-errors version
     lcov --capture \
          --directory . \
          --output-file coverage.info \
          --ignore-errors version \
-         --quiet
+         &> /dev/null
 
-    # Filter Artifacts (System libs, Tests, etc)
-    # Using exact exclusions from original run-coverage.sh
+    # Exact exclusions from run-coverage.sh
+    # Added --ignore-errors version
     lcov --remove coverage.info \
          '/usr/*' \
          '*/_deps/*' \
@@ -49,9 +46,11 @@ echo "--- Running C/C++ Tests & Coverage ---"
          '*/.cache/*' \
          -o coverage.filtered.info \
          --ignore-errors version \
-         --quiet
+         &> /dev/null
 
-    # Move to root for easier discovery
+    # Skip genhtml (not needed for SonarQube)
+
+    # Move to root for scanner pickup
     mv coverage.filtered.info ../coverage.cxx.info
 )
 echo "✅ C/C++ coverage generated: coverage.cxx.info"
@@ -61,9 +60,7 @@ echo "✅ C/C++ coverage generated: coverage.cxx.info"
 echo "--- Running Rust Tests & Coverage ---"
 (
     cd src/rust
-
-    # Generate LCOV report
-    # We use --lcov --output-path ...
+    # Changed --html to --lcov
     cargo llvm-cov --lcov --output-path ../../coverage.rust.info
 )
 echo "✅ Rust coverage generated: coverage.rust.info"
@@ -72,18 +69,14 @@ echo "✅ Rust coverage generated: coverage.rust.info"
 # --- 3. Python Coverage (XML) ---
 echo "--- Running Python Tests & Coverage ---"
 (
-    # Ensure venv is active
     if [ -d ".venv" ]; then
         . .venv/bin/activate
     fi
-
     cd src/python
+    python3 -m pip install --editable .[test] &> /dev/null
 
-    # Install in editable mode with test deps
-    pip install -e .[test] --quiet
-
-    # Run pytest with XML report
-    pytest --cov=httppy --cov-report=xml:../../coverage.python.xml tests
+    # Changed --cov-report=html to --cov-report=xml
+    pytest -sv --cov=httppy --cov-report=xml:../../coverage.python.xml tests
 )
 echo "✅ Python coverage generated: coverage.python.xml"
 
