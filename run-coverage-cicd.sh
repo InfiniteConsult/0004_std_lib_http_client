@@ -29,19 +29,26 @@ echo "--- Running C/C++ Tests & Coverage ---"
     ctest --output-on-failure
 
     # Capture Coverage
+    # Added --ignore-errors version to handle GCC 15 vs System GCOV mismatch
     lcov --capture \
          --directory . \
          --output-file coverage.info \
+         --ignore-errors version \
          --quiet
 
     # Filter Artifacts (System libs, Tests, etc)
+    # Using exact exclusions from original run-coverage.sh
     lcov --remove coverage.info \
          '/usr/*' \
          '*/_deps/*' \
-         '*/tests/*' \
+         '*/tests/helpers.h' \
          '*/benchmark/*' \
          '*/apps/*' \
+         '*/docs/*' \
+         '*/cmake/*' \
+         '*/.cache/*' \
          -o coverage.filtered.info \
+         --ignore-errors version \
          --quiet
 
     # Move to root for easier discovery
@@ -76,11 +83,6 @@ echo "--- Running Python Tests & Coverage ---"
     pip install -e .[test] --quiet
 
     # Run pytest with XML report
-    # We strip the absolute paths to make them relative to project root if needed,
-    # but usually standard XML output works well if run from root.
-    # Here we run from src/python, so the XML will have paths relative to that.
-    # SonarQube often needs paths relative to the PROJECT root.
-
     pytest --cov=httppy --cov-report=xml:../../coverage.python.xml tests
 )
 echo "✅ Python coverage generated: coverage.python.xml"
