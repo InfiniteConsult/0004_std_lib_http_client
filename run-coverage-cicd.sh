@@ -45,10 +45,9 @@ echo "--- Running C/C++ Tests & Coverage ---"
          -o coverage.filtered.info \
          --ignore-errors inconsistent,unused,negative
 
-    # Move LCOV to root for scanner pickup
-    mv coverage.filtered.info ../coverage.cxx.info
+    # We leave coverage.filtered.info here in build_debug
 )
-echo "✅ C/C++ coverage generated: coverage.cxx.info"
+echo "✅ C/C++ coverage generated: build_debug/coverage.filtered.info"
 
 
 # --- 2. Rust Coverage (LCOV) ---
@@ -61,8 +60,8 @@ echo "--- Running Rust Tests & Coverage ---"
 echo "✅ Rust coverage generated: coverage.rust.info"
 
 
-# --- 3. Python Coverage & C++ Conversion (XML) ---
-echo "--- Running Python Tests & Converting C++ Report ---"
+# --- 3. Python Coverage (XML) ---
+echo "--- Running Python Tests & Installing Tools ---"
 (
     if [ -d ".venv" ]; then
         . .venv/bin/activate
@@ -70,19 +69,29 @@ echo "--- Running Python Tests & Converting C++ Report ---"
     cd src/python
 
     # Install test dependencies AND the lcov->cobertura converter
-    # inside the virtual environment to avoid PEP 668 errors.
     python3 -m pip install --editable .[test] lcov_cobertura --quiet
 
     # 1. Run Python Tests (Output XML)
     pytest -sv --cov=httppy --cov-report=xml:../../coverage.python.xml tests
-    echo "✅ Python coverage generated: coverage.python.xml"
-
-    # 2. Convert C++ LCOV to Cobertura XML (using the tool installed above)
-    echo "--- Converting C++ LCOV to Cobertura XML ---"
-    # We are in src/python, so the info file is two levels up
-    lcov_cobertura ../../coverage.cxx.info --output ../../coverage.cxx.xml
-    echo "✅ C/C++ Cobertura XML generated: coverage.cxx.xml"
 )
+echo "✅ Python coverage generated: coverage.python.xml"
+
+
+# --- 4. Convert C++ LCOV to Cobertura XML ---
+echo "--- Converting C++ LCOV to Cobertura XML ---"
+(
+    # Activate venv to access lcov_cobertura
+    if [ -d ".venv" ]; then
+        . .venv/bin/activate
+    fi
+
+    # Go into build directory to maintain relative paths
+    cd build_debug
+
+    # Convert the filtered info file generated in Step 1
+    lcov_cobertura coverage.filtered.info --output coverage.cxx.xml
+)
+echo "✅ C/C++ Cobertura XML generated: build_debug/coverage.cxx.xml"
 
 echo "--- Coverage Complete ---"
-ls -lh coverage.*
+ls -lh coverage.* build_debug/coverage.cxx.xml
