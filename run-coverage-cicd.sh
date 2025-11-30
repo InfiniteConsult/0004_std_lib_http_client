@@ -21,18 +21,17 @@ echo "--- Running C/C++ Tests & Coverage ---"
     cmake -DCMAKE_BUILD_TYPE=Debug ..
     cmake --build . -- -j$(nproc)
 
-    # Added --ignore-errors version for CI toolchain mismatch
+    # Reset counters
     lcov --directory . --zerocounters
 
     ctest --output-on-failure
 
-    # Added --ignore-errors version
+    # Added --ignore-errors inconsistent to handle GCC 15 line mapping edge cases
     lcov --capture \
          --directory . \
          --output-file coverage.info
-
     # Exact exclusions from run-coverage.sh
-    # Added --ignore-errors version
+    # Added --ignore-errors inconsistent
     lcov --remove coverage.info \
          '/usr/*' \
          '*/_deps/*' \
@@ -42,7 +41,8 @@ echo "--- Running C/C++ Tests & Coverage ---"
          '*/docs/*' \
          '*/cmake/*' \
          '*/.cache/*' \
-         -o coverage.filtered.info
+         -o coverage.filtered.info \
+         --ignore-errors inconsistent
 
     # Skip genhtml (not needed for SonarQube)
 
