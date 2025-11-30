@@ -15,8 +15,8 @@ pipeline {
         stage('Test & Coverage') {
             steps {
                 echo '--- Running Tests ---'
-                sh 'chmod +x ./run-coverage.sh'
-                sh './run-coverage.sh'
+                sh 'chmod +x ./run-coverage-cicd.sh'
+                sh './run-coverage-cicd.sh'
             }
         }
 
