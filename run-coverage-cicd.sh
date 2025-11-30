@@ -13,41 +13,48 @@ set -e
 
 # --- 1. C/C++ Coverage (LCOV) ---
 echo "--- Running C/C++ Tests & Coverage ---"
-(
-    mkdir -p build_debug
-    cd build_debug || exit
 
+# A. Zero Counters (Run from Root, targeting build dir)
+mkdir -p build_debug
+lcov --directory build_debug --zerocounters --ignore-errors inconsistent,unused,negative -q
+
+# B. Build & Run Tests (Inside build dir)
+(
+    cd build_debug || exit
     # Ensure Debug build for coverage flags
     cmake -DCMAKE_BUILD_TYPE=Debug ..
     cmake --build . -- -j$(nproc)
-
-    # Reset counters
-    lcov --directory . --zerocounters
-
     ctest --output-on-failure
-
-    # Capture Coverage
-    lcov --capture \
-         --directory . \
-         --output-file coverage.info \
-         --ignore-errors inconsistent,unused,negative
-
-    # Exact exclusions from run-coverage.sh
-    lcov --remove coverage.info \
-         '/usr/*' \
-         '*/_deps/*' \
-         '*/tests/helpers.h' \
-         '*/benchmark/*' \
-         '*/apps/*' \
-         '*/docs/*' \
-         '*/cmake/*' \
-         '*/.cache/*' \
-         -o coverage.filtered.info \
-         --ignore-errors inconsistent,unused,negative
-
-    # We leave coverage.filtered.info here in build_debug
 )
-echo "✅ C/C++ coverage generated: build_debug/coverage.filtered.info"
+
+# C. Capture & Filter (Run from Root)
+# We capture from the root so paths like 'src/c/httpc.c' are relative to here,
+# not relative to build_debug (which would be '../src/c/httpc.c')
+lcov --capture \
+     --directory build_debug \
+     --output-file coverage.cxx.info \
+     --ignore-errors inconsistent,unused,negative \
+     --base-directory .
+
+# Filter Artifacts
+# Using exact exclusions from run-coverage.sh
+lcov --remove coverage.cxx.info \
+     '/usr/*' \
+     '*/_deps/*' \
+     '*/tests/helpers.h' \
+     '*/benchmark/*' \
+     '*/apps/*' \
+     '*/docs/*' \
+     '*/cmake/*' \
+     '*/.cache/*' \
+     -o coverage.cxx.filtered.info \
+     --ignore-errors inconsistent,unused,negative
+
+# Move/Rename final artifact for conversion
+# (It's already in root now, so we just rename/use it)
+mv coverage.cxx.filtered.info coverage.cxx.info
+
+echo "✅ C/C++ coverage generated: coverage.cxx.info"
 
 
 # --- 2. Rust Coverage (LCOV) ---
@@ -60,8 +67,8 @@ echo "--- Running Rust Tests & Coverage ---"
 echo "✅ Rust coverage generated: coverage.rust.info"
 
 
-# --- 3. Python Coverage (XML) ---
-echo "--- Running Python Tests & Installing Tools ---"
+# --- 3. Python Coverage & C++ Conversion (XML) ---
+echo "--- Running Python Tests & Converting C++ Report ---"
 (
     if [ -d ".venv" ]; then
         . .venv/bin/activate
@@ -73,25 +80,15 @@ echo "--- Running Python Tests & Installing Tools ---"
 
     # 1. Run Python Tests (Output XML)
     pytest -sv --cov=httppy --cov-report=xml:../../coverage.python.xml tests
+    echo "✅ Python coverage generated: coverage.python.xml"
+
+    # 2. Convert C++ LCOV to Cobertura XML
+    echo "--- Converting C++ LCOV to Cobertura XML ---"
+    # The info file is now at project root (../../coverage.cxx.info)
+    # We output the XML to project root (../../coverage.cxx.xml)
+    lcov_cobertura ../../coverage.cxx.info --output ../../coverage.cxx.xml
+    echo "✅ C/C++ Cobertura XML generated: coverage.cxx.xml"
 )
-echo "✅ Python coverage generated: coverage.python.xml"
-
-
-# --- 4. Convert C++ LCOV to Cobertura XML ---
-echo "--- Converting C++ LCOV to Cobertura XML ---"
-(
-    # Activate venv to access lcov_cobertura
-    if [ -d ".venv" ]; then
-        . .venv/bin/activate
-    fi
-
-    # Go into build directory to maintain relative paths
-    cd build_debug
-
-    # Convert the filtered info file generated in Step 1
-    lcov_cobertura coverage.filtered.info --output coverage.cxx.xml
-)
-echo "✅ C/C++ Cobertura XML generated: build_debug/coverage.cxx.xml"
 
 echo "--- Coverage Complete ---"
-ls -lh coverage.* build_debug/coverage.cxx.xml
+ls -lh coverage.*
