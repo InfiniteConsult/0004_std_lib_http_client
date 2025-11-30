@@ -29,7 +29,9 @@ echo "--- Running C/C++ Tests & Coverage ---"
     # Added --ignore-errors inconsistent to handle GCC 15 line mapping edge cases
     lcov --capture \
          --directory . \
-         --output-file coverage.info
+         --output-file coverage.info \
+         --ignore-errors inconsistent,unused
+
     # Exact exclusions from run-coverage.sh
     # Added --ignore-errors inconsistent
     lcov --remove coverage.info \
@@ -42,7 +44,7 @@ echo "--- Running C/C++ Tests & Coverage ---"
          '*/cmake/*' \
          '*/.cache/*' \
          -o coverage.filtered.info \
-         --ignore-errors inconsistent
+         --ignore-errors inconsistent,unused
 
     # Skip genhtml (not needed for SonarQube)
 
@@ -65,11 +67,9 @@ echo "✅ Rust coverage generated: coverage.rust.info"
 # --- 3. Python Coverage (XML) ---
 echo "--- Running Python Tests & Coverage ---"
 (
-    if [ -d ".venv" ]; then
-        . .venv/bin/activate
-    fi
+    . .venv/bin/activate
     cd src/python
-    python3 -m pip install --editable .[test] &> /dev/null
+    python3 -m pip install --editable .[test]
 
     # Changed --cov-report=html to --cov-report=xml
     pytest -sv --cov=httppy --cov-report=xml:../../coverage.python.xml tests
