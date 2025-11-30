@@ -30,7 +30,7 @@ echo "--- Running C/C++ Tests & Coverage ---"
     lcov --capture \
          --directory . \
          --output-file coverage.info \
-         --ignore-errors inconsistent,unused
+         --ignore-errors inconsistent,unused,negative
 
     # Exact exclusions from run-coverage.sh
     lcov --remove coverage.info \
@@ -43,7 +43,7 @@ echo "--- Running C/C++ Tests & Coverage ---"
          '*/cmake/*' \
          '*/.cache/*' \
          -o coverage.filtered.info \
-         --ignore-errors inconsistent,unused
+         --ignore-errors inconsistent,unused,negative
 
     # Move LCOV to root for scanner pickup
     mv coverage.filtered.info ../coverage.cxx.info
