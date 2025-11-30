@@ -20,6 +20,17 @@ pipeline {
             }
         }
 
+        stage('Code Analysis') {
+            steps {
+                // This wrapper injects the SONAR_HOST_URL and SONAR_AUTH_TOKEN
+                // environment variables based on the 'SonarQube' config in Jenkins.
+                withSonarQubeEnv('SonarQube') {
+                    // We use the scanner pre-installed in our agent
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+
         stage('Package') {
             steps {
                 echo '--- Packaging Artifacts ---'
