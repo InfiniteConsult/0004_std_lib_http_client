@@ -18,20 +18,18 @@ echo "--- Running C/C++ Tests & Coverage ---"
     cd build_debug || exit
 
     # Ensure Debug build for coverage flags
-    cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON ..
+    cmake -DCMAKE_BUILD_TYPE=Debug ..
     cmake --build . -- -j$(nproc)
 
     # Added --ignore-errors version for CI toolchain mismatch
-    lcov --directory . --zerocounters --ignore-errors version
+    lcov --directory . --zerocounters
 
     ctest --output-on-failure
 
     # Added --ignore-errors version
     lcov --capture \
          --directory . \
-         --output-file coverage.info \
-         --ignore-errors version \
-         &> /dev/null
+         --output-file coverage.info
 
     # Exact exclusions from run-coverage.sh
     # Added --ignore-errors version
@@ -44,9 +42,7 @@ echo "--- Running C/C++ Tests & Coverage ---"
          '*/docs/*' \
          '*/cmake/*' \
          '*/.cache/*' \
-         -o coverage.filtered.info \
-         --ignore-errors version \
-         &> /dev/null
+         -o coverage.filtered.info
 
     # Skip genhtml (not needed for SonarQube)
 
