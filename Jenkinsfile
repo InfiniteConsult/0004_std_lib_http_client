@@ -22,11 +22,15 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                // This wrapper injects the SONAR_HOST_URL and SONAR_AUTH_TOKEN
-                // environment variables based on the 'SonarQube' config in Jenkins.
                 withSonarQubeEnv('SonarQube') {
-                    // We use the scanner pre-installed in our agent
+                    // 1. Run the scanner (Uploads the report)
                     sh 'sonar-scanner'
+                }
+
+                // 2. Wait for the Webhook callback
+                // This pauses the pipeline until SonarQube finishes processing
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
