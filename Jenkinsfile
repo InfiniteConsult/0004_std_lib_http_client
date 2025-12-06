@@ -22,19 +22,22 @@ pipeline {
 
         stage('Code Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner'
-                }
+                script {
+                    def sonarProjectKey = sh(returnStdout: true, script: 'grep "^sonar.projectKey=" sonar-project.properties | cut -d= -f2').trim()
 
-                // Wait for the Quality Gate result
-                timeout(time: 5, unit: 'MINUTES') {
-                    // We use a script block to handle the return logic
-                    script {
+                    def sonarHostUrl = "http://sonarqube.cicd.local:9000"
+
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'sonar-scanner'
+                    }
+
+                    // 3. Wait for Quality Gate
+                    timeout(time: 5, unit: 'MINUTES') {
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             mattermostSend (
                                 color: 'danger',
-                                message: ":no_entry: **Quality Gate Failed**: ${qg.status}\n<${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}|View Analysis>"
+                                message: ":no_entry: **Quality Gate Failed**: ${qg.status}\n<${sonarHostUrl}/dashboard?id=${sonarProjectKey}|View Analysis>"
                             )
                             error "Pipeline aborted due to quality gate failure: ${qg.status}"
                         }
