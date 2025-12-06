@@ -23,14 +23,22 @@ pipeline {
         stage('Code Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    // 1. Run the scanner (Uploads the report)
                     sh 'sonar-scanner'
                 }
 
-                // 2. Wait for the Webhook callback
-                // This pauses the pipeline until SonarQube finishes processing
+                // Wait for the Quality Gate result
                 timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                    // We use a script block to handle the return logic
+                    script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            mattermostSend (
+                                color: 'danger',
+                                message: ":no_entry: **Quality Gate Failed**: ${qg.status}\n<${SONAR_HOST_URL}/dashboard?id=${SONAR_PROJECT_KEY}|View Analysis>"
+                            )
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                    }
                 }
             }
         }
@@ -40,28 +48,17 @@ pipeline {
                 echo '--- Packaging Artifacts ---'
                 sh 'mkdir -p dist'
 
-                // 1. Package C/C++ SDK (CPack)
-                // We run inside build_release to access the CMake cache
                 dir('build_release') {
                     sh 'cpack -G TGZ -C Release'
-                    // Move the resulting tarball to dist/
                     sh 'mv *.tar.gz ../dist/'
                 }
 
-                // 2. Package Rust Crate
-                // We run inside src/rust. No --allow-dirty needed on a fresh CI node.
                 dir('src/rust') {
                     sh 'cargo package'
-                    // Copy the crate from target/package to dist/
                     sh 'cp target/package/*.crate ../../dist/'
                 }
 
-                // 3. Collect Python Wheel
-                // The wheel was built by setup.sh in build_release/wheelhouse
                 sh 'cp build_release/wheelhouse/*.whl dist/'
-
-                // Verify
-                sh 'ls -l dist/'
             }
         }
 
@@ -91,6 +88,22 @@ pipeline {
                     buildNumber: "${BUILD_NUMBER}"
                 )
             }
+        }
+    }
+
+    // Global Post Actions
+    post {
+        failure {
+            mattermostSend (
+                color: 'danger',
+                message: ":x: **Build Failed**\n**Job:** ${env.JOB_NAME} #${env.BUILD_NUMBER}\n(<${env.BUILD_URL}|Open Build>)"
+            )
+        }
+        success {
+            mattermostSend (
+                color: 'good',
+                message: ":white_check_mark: **Build Succeeded**\n**Job:** ${env.JOB_NAME} #${env.BUILD_NUMBER}\n(<${env.BUILD_URL}|Open Build>)"
+            )
         }
     }
 }
